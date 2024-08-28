@@ -19,6 +19,10 @@ const videoSchema = Schema(
       type: String,
       require: true,
     },
+    views: {
+      type: Number,
+      default: 0,
+    },
     duration: {
       type: Number, //cludnary
       require: true,
@@ -41,6 +45,6 @@ const videoSchema = Schema(
   }
 );
 
-videoSchema.plugin(mongooseAggregatePaginate)
+videoSchema.plugin(mongooseAggregatePaginate);
 
 export const Video = mongoose.model("Video", videoSchema);

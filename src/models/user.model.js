@@ -59,13 +59,15 @@ userSchema.pre("save", async function(next){  // rrow func not allowed
         return next() //condition to check if password is modified or else on every compile it will run
     }
 
-    this.password = bcrypt.hash(this.password, 10)  //bcrypt.hash("String", no of salt rounds)
+  return  this.password = await bcrypt.hash(this.password, 10)  //bcrypt.hash("String", no of salt rounds)
 
 })
 
 
 //custom eventis written to check if password matches
 userSchema.methods.isPasswordCorrect = async function(password){
+const value = await bcrypt.compare(password, this.password)
+
    return await bcrypt.compare(password, this.password)
 }
 
